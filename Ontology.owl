@@ -1,0 +1,1784 @@
+@prefix : <http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@base <http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology> .
+
+<http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology> rdf:type owl:Ontology ;
+                                                                          <http://purl.org/dc/elements/1.1/creator> "Andrei Condurache"@en ;
+                                                                          rdfs:label "Architectural Patterns Ontology"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#accesses
+:accesses rdf:type owl:ObjectProperty ;
+          rdfs:domain :Component ;
+          rdfs:range :StorageSystem ;
+          rdfs:label "accesses" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#canBeDesignedUsing
+:canBeDesignedUsing rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Component ;
+                    rdfs:range :ArchitecturalPattern ;
+                    rdfs:label "can Be Designed Using" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#couplingBetweenComponents
+:couplingBetweenComponents rdf:type owl:ObjectProperty ,
+                                    owl:FunctionalProperty ;
+                           rdfs:domain :ArchitecturalPattern ;
+                           rdfs:range :Coupling ;
+                           rdfs:label "coupling Between Components" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#hasAntiPattern
+:hasAntiPattern rdf:type owl:ObjectProperty ;
+                rdfs:domain :ArchitecturalPattern ;
+                rdfs:range :Anti-Pattern ;
+                rdfs:label "has Anti-Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#hasArchitectureCharacteristic
+:hasArchitectureCharacteristic rdf:type owl:ObjectProperty ;
+                               owl:inverseOf :isCharacteristicOf ;
+                               rdfs:domain :ArchitecturalPattern ;
+                               rdfs:range :ArchitectureCharacteristic ;
+                               rdfs:comment "describes what type of Component an Architectural Pattern can have"@en ;
+                               rdfs:label "has Architecture Characteristic" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#hasComponent
+:hasComponent rdf:type owl:ObjectProperty ;
+              owl:inverseOf :isComponentOf ;
+              rdfs:range :Component ;
+              owl:propertyChainAxiom ( :hasTopology
+                                       :hasComponent
+                                     ) ;
+              rdfs:label "has Component" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#hasGranularity
+:hasGranularity rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdfs:domain :Component ;
+                rdfs:range :ComponentGranularity ;
+                rdfs:comment "specifies what Granularity a Component has."@en ;
+                rdfs:label "has Granularity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#hasPartitioning
+:hasPartitioning rdf:type owl:ObjectProperty ;
+                 rdfs:range :Partitioning ;
+                 rdfs:comment "specifies that an Architectural Pattern has a particular Partitioning."@en ;
+                 rdfs:label "has Partitioning" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#hasTopology
+:hasTopology rdf:type owl:ObjectProperty ;
+             rdfs:domain :ArchitecturalPattern ;
+             rdfs:range :Topology ;
+             rdfs:label "has Topology" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#includes
+:includes rdf:type owl:ObjectProperty ;
+          rdfs:domain :Component ;
+          rdfs:range :Component ;
+          rdfs:label "includes" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#inter-componentCommunication
+:inter-componentCommunication rdf:type owl:ObjectProperty ;
+                              rdfs:range :Communication ;
+                              rdfs:comment "indicates the existing type of Communication between the components of an Architectural Pattern."@en ;
+                              rdfs:label "inter-Component Communication" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#isCharacteristicOf
+:isCharacteristicOf rdf:type owl:ObjectProperty ;
+                    rdfs:label "is Characteristic Of" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#isComponentOf
+:isComponentOf rdf:type owl:ObjectProperty ;
+               rdfs:label "is Component Of" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#isSuitableFor
+:isSuitableFor rdf:type owl:ObjectProperty ;
+               rdfs:domain :ArchitecturalPattern ;
+               rdfs:range :SoftwareApplication ;
+               rdfs:label "is Suitable For" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#respectedBy
+:respectedBy rdf:type owl:ObjectProperty ;
+             owl:inverseOf :respectsPrinciple ;
+             rdfs:label "respected By" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#respectsPrinciple
+:respectsPrinciple rdf:type owl:ObjectProperty ;
+                   rdfs:domain :ArchitecturalPattern ;
+                   rdfs:range :ArchitecturalPrinciple ;
+                   rdfs:comment "indicates the Architectural Principle that an architectural pattern respects."@en ;
+                   rdfs:label "respects Principle" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#usedBy
+:usedBy rdf:type owl:ObjectProperty ;
+        owl:inverseOf :usesTheDesignApproach ;
+        rdfs:domain :DesignApproach ;
+        rdfs:range :ArchitecturalPattern ;
+        rdfs:label "used By" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#usedInConjunctionWith
+:usedInConjunctionWith rdf:type owl:ObjectProperty ,
+                                owl:SymmetricProperty ;
+                       rdfs:domain :ArchitecturalPattern ;
+                       rdfs:range :ArchitecturalPattern ;
+                       rdfs:comment "This property specifies an Architectural Pattern that can be used together with another Architectural Pattern"@en ;
+                       rdfs:label "used In Conjunction With" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#usesFrontendApproach
+:usesFrontendApproach rdf:type owl:ObjectProperty ;
+                      rdfs:domain :ArchitecturalPattern ;
+                      rdfs:range :FrontendApproach ;
+                      rdfs:label "uses Frontend Approach" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#usesPattern
+:usesPattern rdf:type owl:ObjectProperty ;
+             rdfs:domain :ArchitecturalPattern ;
+             rdfs:range :Pattern ;
+             rdfs:comment "specifies the Pattern that Architectural Pattern uses."@en ;
+             rdfs:label "uses Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#usesStorageSystem
+:usesStorageSystem rdf:type owl:ObjectProperty ;
+                   rdfs:domain :ArchitecturalPattern ;
+                   rdfs:range :StorageSystem ;
+                   rdfs:label "uses Storage System" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#usesTheDesignApproach
+:usesTheDesignApproach rdf:type owl:ObjectProperty ;
+                       rdfs:domain :ArchitecturalPattern ;
+                       rdfs:range :DesignApproach ;
+                       rdfs:label "uses The Design Approach" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://schema.org/alternateName
+<http://schema.org/alternateName> rdf:type owl:DatatypeProperty ;
+                                  rdfs:range xsd:string ;
+                                  rdfs:comment "indicates what other name an Architectural Pattern is known by."@en ;
+                                  rdfs:label "alternate Name" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#hasMultipleDeployableUnits
+:hasMultipleDeployableUnits rdf:type owl:DatatypeProperty ,
+                                     owl:FunctionalProperty ;
+                            rdfs:domain :ArchitecturalPattern ;
+                            rdfs:range xsd:boolean ;
+                            rdfs:comment "specifies true or false if an Architectural Pattern is composed of multiple deployable units."@en ;
+                            rdfs:label "has Multiple Deployable Units" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ratingValue
+:ratingValue rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :ArchitectureCharacteristic ;
+             rdfs:range xsd:integer ;
+             rdfs:label "rating Value" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#requiresOrchestration
+:requiresOrchestration rdf:type owl:DatatypeProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:range xsd:boolean ;
+                       rdfs:comment "specifies if orchestration is necessary for an Architectural Pattern."@en ;
+                       rdfs:label "requires Orchestration" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#APILayer
+:APILayer rdf:type owl:Class ;
+          rdfs:subClassOf :Component ;
+          rdfs:label "API Layer" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Anti-Pattern
+:Anti-Pattern rdf:type owl:Class ;
+              rdfs:comment "Refers to common design or implementation pitfalls that should be avoided."@en ;
+              rdfs:label "Anti-Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ArchitecturalPattern
+:ArchitecturalPattern rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty :hasArchitectureCharacteristic ;
+                                        owl:someValuesFrom :ArchitectureCharacteristic
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :hasComponent ;
+                                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass :Component
+                                      ] ;
+                      rdfs:comment "The class of Architectural patterns."@en ;
+                      rdfs:label "Architectural Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ArchitecturalPrinciple
+:ArchitecturalPrinciple rdf:type owl:Class ;
+                        rdfs:comment "describes the class of guidelines for making architectural decisions that lead to clean and maintainable applications."@en ;
+                        rdfs:label "Architectural Principle" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ArchitectureCharacteristic
+:ArchitectureCharacteristic rdf:type owl:Class ;
+                            rdfs:comment "refers to an important aspect of the system which isn’t related to the domain functionality."@en ;
+                            rdfs:label "Architecture Characteristic" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#AsynchronousCommunication
+:AsynchronousCommunication rdf:type owl:Class ;
+                           rdfs:subClassOf :Communication ;
+                           owl:disjointWith :SynchronousCommunication ;
+                           rdfs:label "Asynchronous Communication" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#AsynchronousMessaging
+:AsynchronousMessaging rdf:type owl:Class ;
+                       rdfs:subClassOf :AsynchronousCommunication ;
+                       rdfs:label "Asynchronous Messaging" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#BusinessApplication
+:BusinessApplication rdf:type owl:Class ;
+                     rdfs:subClassOf :SoftwareApplication ;
+                     rdfs:label "Business Application" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Communication
+:Communication rdf:type owl:Class ;
+               rdfs:comment "describes how components communicate with one another."@en ;
+               rdfs:label "Communication" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Component
+:Component rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasGranularity ;
+                             owl:someValuesFrom :ComponentGranularity
+                           ] ;
+           rdfs:comment "refers to a fundamental building block in architecture that performs specific business or infrastructure tasks."@en ;
+           rdfs:label "Component" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ComponentGranularity
+:ComponentGranularity rdf:type owl:Class ;
+                      rdfs:comment "refers to the deployment unit’s size."@en ;
+                      rdfs:label "Component Granularity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#CoreSystem
+:CoreSystem rdf:type owl:Class ;
+            rdfs:subClassOf :Component .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Coupling
+:Coupling rdf:type owl:Class ;
+          rdfs:comment "represents the extent to which components know about each other."@en ;
+          rdfs:label "Coupling" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Deployability
+:Deployability rdf:type owl:Class ;
+               rdfs:subClassOf :ArchitectureCharacteristic ;
+               rdfs:label "Deployability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DesignApproach
+:DesignApproach rdf:type owl:Class ;
+                rdfs:comment "illustrates a methodology or set of principles intended to provide assistance in the design process."@en ;
+                rdfs:label "Design Approach" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DiscoveryComponent
+:DiscoveryComponent rdf:type owl:Class ;
+                    rdfs:subClassOf :Component ;
+                    rdfs:label "Discovery Component" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DistributedArchitecturalPattern
+:DistributedArchitecturalPattern rdf:type owl:Class ;
+                                 rdfs:subClassOf :ArchitecturalPattern ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasMultipleDeployableUnits ;
+                                                   owl:hasValue "true"^^xsd:boolean
+                                                 ] ;
+                                 owl:disjointWith :MonolithicArchitecturalPattern ;
+                                 rdfs:label "Distributed Architectural Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Domain-CentricComponent
+:Domain-CentricComponent rdf:type owl:Class ;
+                         rdfs:subClassOf :Component ;
+                         rdfs:label "Domain-Centric Component" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Elasticity
+:Elasticity rdf:type owl:Class ;
+            rdfs:subClassOf :ArchitectureCharacteristic ;
+            rdfs:label "Elasticity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Event
+:Event rdf:type owl:Class ;
+       rdfs:subClassOf :Component ;
+       rdfs:label "Event" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Event_Processing_Component
+:Event_Processing_Component rdf:type owl:Class ;
+                            rdfs:subClassOf :Component ;
+                            rdfs:label "Event Processing Component" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Fault_Tolerance
+:Fault_Tolerance rdf:type owl:Class ;
+                 rdfs:subClassOf :ArchitectureCharacteristic ;
+                 rdfs:label "Fault Tolerance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Filter_Component
+:Filter_Component rdf:type owl:Class ;
+                  rdfs:subClassOf :Component ;
+                  rdfs:label "Filter Component" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#FrontendApproach
+:FrontendApproach rdf:type owl:Class ;
+                  rdfs:comment "defines how the user interface can be designed within the system"@en ;
+                  rdfs:label "Frontend Approach" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LayerComponent
+:LayerComponent rdf:type owl:Class ;
+                rdfs:subClassOf :Component ;
+                rdfs:label "Layer Component" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LayeredCoreSystem
+:LayeredCoreSystem rdf:type owl:Class ;
+                   rdfs:subClassOf :CoreSystem ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :hasPartitioning ;
+                                     owl:hasValue :TechnicalPartitioning
+                                   ] .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MobileApplication
+:MobileApplication rdf:type owl:Class ;
+                   rdfs:subClassOf :SoftwareApplication ;
+                   rdfs:label "Mobile Application" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ModularCoreSystem
+:ModularCoreSystem rdf:type owl:Class ;
+                   rdfs:subClassOf :CoreSystem ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :hasPartitioning ;
+                                     owl:hasValue :DomainPartitioning
+                                   ] .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Modularity
+:Modularity rdf:type owl:Class ;
+            rdfs:subClassOf :ArchitectureCharacteristic ;
+            rdfs:label "Modularity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Module
+:Module rdf:type owl:Class ;
+        rdfs:subClassOf :Component ;
+        rdfs:label "Module" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MonolithicArchitecturalPattern
+:MonolithicArchitecturalPattern rdf:type owl:Class ;
+                                rdfs:subClassOf :ArchitecturalPattern ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty :hasMultipleDeployableUnits ;
+                                                  owl:hasValue "false"^^xsd:boolean
+                                                ] ;
+                                rdfs:label "Monolithic Architectural Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Orchestration
+:Orchestration rdf:type owl:Class ;
+               rdfs:label "Orchestration" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Overall_Cost
+:Overall_Cost rdf:type owl:Class ;
+              rdfs:subClassOf :ArchitectureCharacteristic ;
+              rdfs:label "Overall Cost" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Partitioning
+:Partitioning rdf:type owl:Class ;
+              rdfs:comment "defines the organization of the system components according to technical usage."@en ;
+              rdfs:label "Partioning" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Pattern
+:Pattern rdf:type owl:Class ;
+         rdfs:comment "defines a reusable solution to a problem that occurs in a particular context."@en ;
+         rdfs:label "Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Performance
+:Performance rdf:type owl:Class ;
+             rdfs:subClassOf :ArchitectureCharacteristic ;
+             rdfs:label "Performance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Point-to-pointCommunication
+:Point-to-pointCommunication rdf:type owl:Class ;
+                             rdfs:subClassOf :SynchronousCommunication ;
+                             rdfs:label "Point-to-point Communication" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Reliability
+:Reliability rdf:type owl:Class ;
+             rdfs:subClassOf :ArchitectureCharacteristic ;
+             rdfs:label "Reliability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#RemoteProcedureInvocation
+:RemoteProcedureInvocation rdf:type owl:Class ;
+                           rdfs:subClassOf :SynchronousCommunication ;
+                           rdfs:label "Remote Procedure Invocation" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Scalability
+:Scalability rdf:type owl:Class ;
+             rdfs:subClassOf :ArchitectureCharacteristic ;
+             rdfs:label "Scalability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ServiceComponent
+:ServiceComponent rdf:type owl:Class ;
+                  rdfs:subClassOf :Component ;
+                  rdfs:label "Service Component" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Simplicity
+:Simplicity rdf:type owl:Class ;
+            rdfs:subClassOf :ArchitectureCharacteristic .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#SoftwareApplication
+:SoftwareApplication rdf:type owl:Class ;
+                     rdfs:comment "the class of software applications."@en ;
+                     rdfs:label "Software Application" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#StorageSystem
+:StorageSystem rdf:type owl:Class ;
+               rdfs:label "Storage System" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#SynchronousCommunication
+:SynchronousCommunication rdf:type owl:Class ;
+                          rdfs:subClassOf :Communication ;
+                          rdfs:label "Synchronous Communication" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Testability
+:Testability rdf:type owl:Class ;
+             rdfs:subClassOf :ArchitectureCharacteristic ;
+             rdfs:label "Testability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Topology
+:Topology rdf:type owl:Class ;
+          rdfs:comment "illustrates various topology variants an architecture may have."@en ;
+          rdfs:label "Topology" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#WebApplication
+:WebApplication rdf:type owl:Class ;
+                rdfs:subClassOf :SoftwareApplication ;
+                rdfs:label "Web Application" .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://dbpedia.org/resource/Event-driven_architecture
+dbr:Event-driven_architecture rdf:type owl:NamedIndividual ;
+                              owl:sameAs :Event-Driven_Architecture_Pattern .
+
+
+###  http://dbpedia.org/resource/Microservices
+dbr:Microservices rdf:type owl:NamedIndividual ;
+                  owl:sameAs :Microservices_Architecture_Pattern .
+
+
+###  http://dbpedia.org/resource/Service-oriented_architecture
+dbr:Service-oriented_architecture rdf:type owl:NamedIndividual ;
+                                  owl:sameAs :Service_Oriented_Architecture_Pattern .
+
+
+###  http://dbpedia.org/resource/Space-based_architecture
+dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
+                             owl:sameAs :Space-Based_Architecture_Pattern .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#APIGateway
+:APIGateway rdf:type owl:NamedIndividual ,
+                     :APILayer ;
+            rdfs:label "API Gateway" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#APIGatewayPattern
+:APIGatewayPattern rdf:type owl:NamedIndividual ,
+                            :Pattern ;
+                   rdfs:label "API Gateway Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#API_Facade_Layer
+:API_Facade_Layer rdf:type owl:NamedIndividual ,
+                           :LayerComponent ;
+                  rdfs:label "API Facade Layer" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#API_REST-based_topology
+:API_REST-based_topology rdf:type owl:NamedIndividual ,
+                                  :Topology ;
+                         rdfs:label "API REST-based Topology" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ApplicationService
+:ApplicationService rdf:type owl:NamedIndividual ,
+                             :ServiceComponent ;
+                    rdfs:label "Application Service" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Application_REST-based_topology
+:Application_REST-based_topology rdf:type owl:NamedIndividual ,
+                                          :Topology ;
+                                 rdfs:label "Application REST-based Topology" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ArchitectureByImplicationAnti-Pattern
+:ArchitectureByImplicationAnti-Pattern rdf:type owl:NamedIndividual ,
+                                                :Anti-Pattern ;
+                                       rdfs:label "Architecture By Implication Anti-Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ArchitectureSinkholeAnti-Pattern
+:ArchitectureSinkholeAnti-Pattern rdf:type owl:NamedIndividual ,
+                                           :Anti-Pattern ;
+                                  rdfs:label "Architecture Sinkhole Anti-Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#BackendsForFrontends
+:BackendsForFrontends rdf:type owl:NamedIndividual ,
+                               :Pattern ;
+                      rdfs:label "Backends for Frontends" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Bounded_contexts
+:Bounded_contexts rdf:type owl:NamedIndividual ,
+                           :ArchitecturalPrinciple ;
+                  rdfs:label "Bounded contexts" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Broker_Topology
+:Broker_Topology rdf:type owl:NamedIndividual ,
+                          :Topology ;
+                 :hasComponent :Event_Broker ,
+                               :Event_Processor ,
+                               :InitiatingEvent ,
+                               :Processing_Event ;
+                 :inter-componentCommunication :MessageQueues ;
+                 :requiresOrchestration "false"^^xsd:boolean ;
+                 rdfs:label "Broker Topology" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#BusinessDelegate
+:BusinessDelegate rdf:type owl:NamedIndividual ,
+                           :Pattern ;
+                  rdfs:label "Business Delegate" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#BusinessService
+:BusinessService rdf:type owl:NamedIndividual ,
+                          :ServiceComponent ;
+                 rdfs:label "Business Service" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Business_Layer
+:Business_Layer rdf:type owl:NamedIndividual ,
+                         :LayerComponent ;
+                rdfs:label "Business Layer" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#CQRSPattern
+:CQRSPattern rdf:type owl:NamedIndividual ,
+                      :Pattern ;
+             rdfs:label "CQRS Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Centralized_messaging_topology
+:Centralized_messaging_topology rdf:type owl:NamedIndividual ,
+                                         :Topology ;
+                                rdfs:label "Centralized Messaging Topology" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Centrally_Shared_Database
+:Centrally_Shared_Database rdf:type owl:NamedIndividual ,
+                                    :StorageSystem ;
+                           rdfs:label "Centrally Shared Database" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#CircuitBreakerPattern
+:CircuitBreakerPattern rdf:type owl:NamedIndividual ,
+                                :Pattern ;
+                       rdfs:label "Circuit Breaker Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Coarse-Grained_Component
+:Coarse-Grained_Component rdf:type owl:NamedIndividual ,
+                                   :ComponentGranularity ;
+                          rdfs:label "Coarse-Grained Component" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ConsumerFilter
+:ConsumerFilter rdf:type owl:NamedIndividual ,
+                         :Filter_Component ;
+                :accesses :Centrally_Shared_Database ;
+                rdfs:label "Consumer Filter" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#CoreSystem
+:CoreSystem rdf:type owl:NamedIndividual ,
+                     :Component ;
+            :accesses :Centrally_Shared_Database ;
+            :canBeDesignedUsing :Layered_Architecture_Pattern ,
+                                :Modular_Monolith_Architecture .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DRY
+:DRY rdf:type owl:NamedIndividual ,
+              :ArchitecturalPrinciple ;
+     rdfs:label "DRY" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DataGrid
+:DataGrid rdf:type owl:NamedIndividual ,
+                   :Component ;
+          rdfs:label "Data Grid" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DataPumps
+:DataPumps rdf:type owl:NamedIndividual ,
+                    :Component ;
+           rdfs:label "Data Pumps" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DataReader
+:DataReader rdf:type owl:NamedIndividual ,
+                     :Component ;
+            rdfs:label "Data Reader" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DataWriter
+:DataWriter rdf:type owl:NamedIndividual ,
+                     :Component ;
+            rdfs:label "Data Writer" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Database_Layer
+:Database_Layer rdf:type owl:NamedIndividual ,
+                         :LayerComponent ;
+                rdfs:label "Database Layer" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Dependency_inversion
+:Dependency_inversion rdf:type owl:NamedIndividual ,
+                               :ArchitecturalPrinciple ;
+                      rdfs:label "Dependency inversion" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DeploymentManager
+:DeploymentManager rdf:type owl:NamedIndividual ,
+                            :Component ;
+                   rdfs:label "Deployment Manager" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DesingForFailure
+:DesingForFailure rdf:type owl:NamedIndividual ,
+                           :DesignApproach ;
+                  rdfs:label "Design for Failure" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Domain-DrivenDesignApproach
+:Domain-DrivenDesignApproach rdf:type owl:NamedIndividual ,
+                                      :DesignApproach ;
+                             :usedBy :Microservices_Architecture_Pattern ;
+                             rdfs:label "Domain-Driven Design Approach" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Domain-ScopedDatabase
+:Domain-ScopedDatabase rdf:type owl:NamedIndividual ,
+                                :StorageSystem ;
+                       rdfs:label "Domain-Scoped Database" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Domain-basedUserInterface
+:Domain-basedUserInterface rdf:type owl:NamedIndividual ,
+                                    :FrontendApproach ;
+                           rdfs:label "Domain-based User Interface" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DomainPartitioning
+:DomainPartitioning rdf:type owl:NamedIndividual ,
+                             :Partitioning ;
+                    rdfs:label "Domain Partitioning" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DomainService
+:DomainService rdf:type owl:NamedIndividual ,
+                        :ServiceComponent ;
+               :accesses :Centrally_Shared_Database ,
+                         :Domain-ScopedDatabase ;
+               :canBeDesignedUsing :Layered_Architecture_Pattern ,
+                                   :Modular_Monolith_Architecture ;
+               :hasComponent :API_Facade_Layer ;
+               :hasGranularity :Coarse-Grained_Component ;
+               rdfs:label "Domain Service" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Encapsulation
+:Encapsulation rdf:type owl:NamedIndividual ,
+                        :ArchitecturalPrinciple ;
+               rdfs:label "Encapsulation" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#EnterpriseService
+:EnterpriseService rdf:type owl:NamedIndividual ,
+                            :ServiceComponent ;
+                   rdfs:label "Enterprise Service" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Event-Driven_Architecture_Pattern
+:Event-Driven_Architecture_Pattern rdf:type owl:NamedIndividual ,
+                                            :DistributedArchitecturalPattern ;
+                                   :couplingBetweenComponents :LooseCoupling ;
+                                   :hasArchitectureCharacteristic :HighModularity ,
+                                                                  :HighScalability ,
+                                                                  :LowTestability ,
+                                                                  :MediumDeployability ,
+                                                                  :MediumElasticity ,
+                                                                  :MediumOverallCost ,
+                                                                  :MediumReliability ,
+                                                                  :VeryHighFaultTolerance ,
+                                                                  :VeryHighPerformance ,
+                                                                  :VeryLowSimplicity ;
+                                   :hasPartitioning :TechnicalPartitioning ;
+                                   :hasTopology :Broker_Topology ,
+                                                :Mediator_Topology ;
+                                   :usedInConjunctionWith :Microkernel_Architecture_Pattern ,
+                                                          :Microservices_Architecture_Pattern ,
+                                                          :PipelineArchitecture ,
+                                                          :Service_Oriented_Architecture_Pattern ,
+                                                          :Space-Based_Architecture_Pattern ;
+                                   rdfs:label "Event-Driven Architecture Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Event_Broker
+:Event_Broker rdf:type owl:NamedIndividual ,
+                       :Event_Processing_Component ;
+              rdfs:label "Event Broker" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Event_Channel
+:Event_Channel rdf:type owl:NamedIndividual ,
+                        :Event_Processing_Component ;
+               rdfs:label "Event Channel" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Event_Mediator
+:Event_Mediator rdf:type owl:NamedIndividual ,
+                         :Event_Processing_Component ;
+                rdfs:label "Event Mediator" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Event_Processor
+:Event_Processor rdf:type owl:NamedIndividual ,
+                          :Event_Processing_Component ;
+                 rdfs:label "Event Processor" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Event_Queue
+:Event_Queue rdf:type owl:NamedIndividual ,
+                      :Event_Processing_Component ;
+             rdfs:label "Event Queue" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Explicit_dependencies
+:Explicit_dependencies rdf:type owl:NamedIndividual ,
+                                :ArchitecturalPrinciple ;
+                       rdfs:label "Explicit dependencies" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Fine-GrainedComponent
+:Fine-GrainedComponent rdf:type owl:NamedIndividual ,
+                                :ComponentGranularity ;
+                       rdfs:label "Fine-Grained Component" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#FunctionCall
+:FunctionCall rdf:type owl:NamedIndividual ,
+                       :Point-to-pointCommunication ;
+              rdfs:label "Function Call" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#HighDeployability
+:HighDeployability rdf:type owl:NamedIndividual ,
+                            :Deployability ;
+                   :ratingValue 4 ;
+                   rdfs:label "High Deployability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#HighElasticity
+:HighElasticity rdf:type owl:NamedIndividual ,
+                         :Elasticity ;
+                :ratingValue 4 ;
+                rdfs:label "High Elasticity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#HighFaultTolerance
+:HighFaultTolerance rdf:type owl:NamedIndividual ,
+                             :Fault_Tolerance ;
+                    :ratingValue 4 ;
+                    rdfs:label "High Fault Tolerance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#HighModularity
+:HighModularity rdf:type owl:NamedIndividual ,
+                         :Modularity ;
+                :ratingValue 4 ;
+                rdfs:label "High Modularity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#HighOverallCost
+:HighOverallCost rdf:type owl:NamedIndividual ,
+                          :Overall_Cost ;
+                 :ratingValue 4 ;
+                 rdfs:label "High Overall Cost" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#HighPerformance
+:HighPerformance rdf:type owl:NamedIndividual ,
+                          :Performance ;
+                 :ratingValue 4 ;
+                 rdfs:label "High Performance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#HighReliability
+:HighReliability rdf:type owl:NamedIndividual ,
+                          :Reliability ;
+                 :ratingValue 4 ;
+                 rdfs:label "High Reliability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#HighScalability
+:HighScalability rdf:type owl:NamedIndividual ,
+                          :Scalability ;
+                 :ratingValue 4 ;
+                 rdfs:label "High Scalability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#HighSimplicity
+:HighSimplicity rdf:type owl:NamedIndividual ,
+                         :Simplicity ;
+                :ratingValue 4 ;
+                rdfs:label "High Simplicity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#HighTestability
+:HighTestability rdf:type owl:NamedIndividual ,
+                          :Testability ;
+                 :ratingValue 4 ;
+                 rdfs:label "High Testability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#InfrastructureService
+:InfrastructureService rdf:type owl:NamedIndividual ,
+                                :ServiceComponent ;
+                       rdfs:label "Infrastructure Service" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#InitiatingEvent
+:InitiatingEvent rdf:type owl:NamedIndividual ,
+                          :Event ;
+                 rdfs:label "Initiating Event" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LayeredCoreSystem
+:LayeredCoreSystem rdf:type owl:NamedIndividual ,
+                            :CoreSystem ;
+                   :accesses :Centrally_Shared_Database .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Layered_Architecture_Pattern
+:Layered_Architecture_Pattern rdf:type owl:NamedIndividual ,
+                                       :MonolithicArchitecturalPattern ;
+                              :hasAntiPattern :ArchitectureByImplicationAnti-Pattern ,
+                                              :ArchitectureSinkholeAnti-Pattern ;
+                              :hasArchitectureCharacteristic :LowPerformance ,
+                                                             :LowTestability ,
+                                                             :MediumReliability ,
+                                                             :VeryHighOverallCost ,
+                                                             :VeryHighSimplicity ,
+                                                             :VeryLowDeployability ,
+                                                             :VeryLowElasticity ,
+                                                             :VeryLowFaultTolerance ,
+                                                             :VeryLowModularity ,
+                                                             :VeryLowScalability ;
+                              :hasComponent :Business_Layer ,
+                                            :Database_Layer ,
+                                            :Persistence_Layer ,
+                                            :Presentation_Layer ;
+                              :hasPartitioning :TechnicalPartitioning ;
+                              :respectsPrinciple :Separation_of_concerns ;
+                              :usesPattern :BusinessDelegate ;
+                              <http://schema.org/alternateName> "N-tiered Architecture"^^xsd:string ;
+                              :requiresOrchestration "false"^^xsd:boolean ;
+                              rdfs:label "Layered Architecture Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LooseCoupling
+:LooseCoupling rdf:type owl:NamedIndividual ,
+                        :Coupling ;
+               rdfs:label "Loose Coupling" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LowDeployability
+:LowDeployability rdf:type owl:NamedIndividual ,
+                           :Deployability ;
+                  :ratingValue 2 ;
+                  rdfs:label "Low Deployability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LowElasticity
+:LowElasticity rdf:type owl:NamedIndividual ,
+                        :Elasticity ;
+               :ratingValue 2 ;
+               rdfs:label "Low Elasticity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LowFaultTolerance
+:LowFaultTolerance rdf:type owl:NamedIndividual ,
+                            :Fault_Tolerance ;
+                   :ratingValue 2 ;
+                   rdfs:label "Low Fault Tolerance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LowModularity
+:LowModularity rdf:type owl:NamedIndividual ,
+                        :Modularity ;
+               :ratingValue 2 ;
+               rdfs:label "Low Modularity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LowOverallCost
+:LowOverallCost rdf:type owl:NamedIndividual ,
+                         :Overall_Cost ;
+                :ratingValue "2"^^xsd:int ;
+                rdfs:label "Low Overall Cost" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LowPerformance
+:LowPerformance rdf:type owl:NamedIndividual ,
+                         :Performance ;
+                :ratingValue "2"^^xsd:int ;
+                rdfs:label "Low Performance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LowReliability
+:LowReliability rdf:type owl:NamedIndividual ,
+                         :Reliability ;
+                :ratingValue 2 ;
+                rdfs:label "Low Reliability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LowScalability
+:LowScalability rdf:type owl:NamedIndividual ,
+                         :Scalability ;
+                :ratingValue 2 ;
+                rdfs:label "Low Scalability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LowSimplicity
+:LowSimplicity rdf:type owl:NamedIndividual ,
+                        :Simplicity ;
+               :ratingValue 2 ;
+               rdfs:label "Low Simplicity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LowTestability
+:LowTestability rdf:type owl:NamedIndividual ,
+                         :Testability ;
+                :ratingValue 2 ;
+                rdfs:label "Low Testability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Mediator_Topology
+:Mediator_Topology rdf:type owl:NamedIndividual ,
+                            :Topology ;
+                   :hasComponent :Event_Channel ,
+                                 :Event_Mediator ,
+                                 :Event_Processor ,
+                                 :Event_Queue ,
+                                 :InitiatingEvent ;
+                   :inter-componentCommunication :PublishSubscribe ,
+                                                 <http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Request/Reply> ;
+                   rdfs:label "Mediator Topology" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MediumDeployability
+:MediumDeployability rdf:type owl:NamedIndividual ,
+                              :Deployability ;
+                     :ratingValue 3 ;
+                     rdfs:label "Medium Deployability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MediumElasticity
+:MediumElasticity rdf:type owl:NamedIndividual ,
+                           :Elasticity ;
+                  :ratingValue 3 ;
+                  rdfs:label "Medium Elasticity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MediumFaultTolerance
+:MediumFaultTolerance rdf:type owl:NamedIndividual ,
+                               :Fault_Tolerance ;
+                      :ratingValue 3 ;
+                      rdfs:label "Medium Fault Tolerance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MediumModularity
+:MediumModularity rdf:type owl:NamedIndividual ,
+                           :Modularity ;
+                  :ratingValue 3 ;
+                  rdfs:label "Medium Modularity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MediumOverallCost
+:MediumOverallCost rdf:type owl:NamedIndividual ,
+                            :Overall_Cost ;
+                   :ratingValue 3 ;
+                   rdfs:label "Medium Overall Cost" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MediumPerformance
+:MediumPerformance rdf:type owl:NamedIndividual ,
+                            :Performance ;
+                   :ratingValue 3 ;
+                   rdfs:label "Medium Performance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MediumReliability
+:MediumReliability rdf:type owl:NamedIndividual ,
+                            :Reliability ;
+                   :ratingValue 3 ;
+                   rdfs:label "Medium Reliability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MediumScalability
+:MediumScalability rdf:type owl:NamedIndividual ,
+                            :Scalability ;
+                   :ratingValue 3 ;
+                   rdfs:label "Medium Scalability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MediumSimplicity
+:MediumSimplicity rdf:type owl:NamedIndividual ,
+                           :Simplicity ;
+                  :ratingValue 3 ;
+                  rdfs:label "Medium Simplicity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MediumTestability
+:MediumTestability rdf:type owl:NamedIndividual ,
+                            :Testability ;
+                   :ratingValue 3 ;
+                   rdfs:label "Medium Testability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MessageQueues
+:MessageQueues rdf:type owl:NamedIndividual ,
+                        :AsynchronousMessaging ;
+               rdfs:label "Message Queues" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MessagingGrid
+:MessagingGrid rdf:type owl:NamedIndividual ,
+                        :Component ;
+               rdfs:label "Messaging Grid" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MessagingMiddleware
+:MessagingMiddleware rdf:type owl:NamedIndividual ,
+                              :Component ;
+                     <http://schema.org/alternateName> "Enterprise Service Bus"^^xsd:string ,
+                                                       "Integration Hub"^^xsd:string ;
+                     rdfs:label "Messaging Middleware" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MethodInvocation
+:MethodInvocation rdf:type owl:NamedIndividual ,
+                           :Point-to-pointCommunication ;
+                  rdfs:label "Method Invocation" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Micro-frontend
+:Micro-frontend rdf:type owl:NamedIndividual ,
+                         :FrontendApproach ;
+                rdfs:label "Micro-frontend" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Microkernel_Architecture_Pattern
+:Microkernel_Architecture_Pattern rdf:type owl:NamedIndividual ,
+                                           :MonolithicArchitecturalPattern ;
+                                  :couplingBetweenComponents :LooseCoupling ;
+                                  :hasArchitectureCharacteristic :HighSimplicity ,
+                                                                 :MediumDeployability ,
+                                                                 :MediumModularity ,
+                                                                 :MediumPerformance ,
+                                                                 :MediumReliability ,
+                                                                 :MediumTestability ,
+                                                                 :VeryHighOverallCost ,
+                                                                 :VeryLowElasticity ,
+                                                                 :VeryLowFaultTolerance ,
+                                                                 :VeryLowScalability ;
+                                  :hasComponent :CoreSystem ,
+                                                :Plug-inComponent ;
+                                  :hasPartitioning :DomainPartitioning ,
+                                                   :TechnicalPartitioning ;
+                                  :inter-componentCommunication :FunctionCall ,
+                                                                :MessageQueues ,
+                                                                :MethodInvocation ,
+                                                                :RemoteProcedureInvocationUsingRest ;
+                                  <http://schema.org/alternateName> "Plug-in Architecture"^^xsd:string ;
+                                  rdfs:label "Microkernel Architecture Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Microservice
+:Microservice rdf:type owl:NamedIndividual ,
+                       :ServiceComponent ;
+              :accesses :OwnSeparateDatabase ;
+              :hasGranularity :Fine-GrainedComponent ;
+              rdfs:label "Microservice" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Microservices_Architecture_Pattern
+:Microservices_Architecture_Pattern rdf:type owl:NamedIndividual ,
+                                             :DistributedArchitecturalPattern ;
+                                    :couplingBetweenComponents :LooseCoupling ;
+                                    :hasArchitectureCharacteristic :HighDeployability ,
+                                                                   :HighFaultTolerance ,
+                                                                   :HighReliability ,
+                                                                   :HighTestability ,
+                                                                   :LowPerformance ,
+                                                                   :VeryHighElasticity ,
+                                                                   :VeryHighModularity ,
+                                                                   :VeryHighScalability ,
+                                                                   :VeryLowOverallCost ,
+                                                                   :VeryLowSimplicity ;
+                                    :hasComponent :APIGateway ,
+                                                  :Microservice ;
+                                    :hasPartitioning :DomainPartitioning ;
+                                    :hasTopology :API_REST-based_topology ,
+                                                 :Application_REST-based_topology ,
+                                                 :Centralized_messaging_topology ;
+                                    :inter-componentCommunication :MessageQueues ,
+                                                                  :PublishSubscribe ,
+                                                                  :RemoteProcedureInvocationUsingRest ,
+                                                                  :RemoteProcedureInvocationUsinggRPC ;
+                                    :respectsPrinciple :Bounded_contexts ,
+                                                       :DRY ;
+                                    :usesFrontendApproach :Micro-frontend ,
+                                                          :Monolithic_Frontend ;
+                                    :usesPattern :APIGatewayPattern ,
+                                                 :BackendsForFrontends ,
+                                                 :CQRSPattern ,
+                                                 :CircuitBreakerPattern ,
+                                                 :SagaPattern ,
+                                                 :SidecarPattern ;
+                                    :usesTheDesignApproach :Domain-DrivenDesignApproach ;
+                                    :hasMultipleDeployableUnits "true"^^xsd:boolean ;
+                                    :requiresOrchestration "false"^^xsd:boolean ;
+                                    rdfs:label "Microservices Architecture Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ModularCoreSystem
+:ModularCoreSystem rdf:type owl:NamedIndividual ,
+                            :CoreSystem ;
+                   :accesses :Centrally_Shared_Database .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Modular_Monolith_Architecture
+:Modular_Monolith_Architecture rdf:type owl:NamedIndividual ,
+                                        :MonolithicArchitecturalPattern ;
+                               :hasPartitioning :DomainPartitioning ;
+                               rdfs:label "Modular Monolith Architecture" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Monolithic_Frontend
+:Monolithic_Frontend rdf:type owl:NamedIndividual ,
+                              :FrontendApproach ;
+                     rdfs:label "Monolithic Frontend" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#OwnSeparateDatabase
+:OwnSeparateDatabase rdf:type owl:NamedIndividual ,
+                              :StorageSystem ;
+                     rdfs:label "Own Separate Database" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Persistence_Layer
+:Persistence_Layer rdf:type owl:NamedIndividual ,
+                            :LayerComponent ;
+                   rdfs:label "Persistence Layer" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Persistence_ignorance
+:Persistence_ignorance rdf:type owl:NamedIndividual ,
+                                :ArchitecturalPrinciple ;
+                       rdfs:label "Persistence ignorance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#PipeComponent
+:PipeComponent rdf:type owl:NamedIndividual ,
+                        :Component ;
+               rdfs:label "Pipe Component" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#PipelineArchitecture
+:PipelineArchitecture rdf:type owl:NamedIndividual ,
+                               :MonolithicArchitecturalPattern ;
+                      :hasComponent :ConsumerFilter ,
+                                    :PipeComponent ,
+                                    :ProducerFilter ,
+                                    :TesterFilter ,
+                                    :TransormerFilter ;
+                      :hasPartitioning :TechnicalPartitioning ;
+                      <http://schema.org/alternateName> "Pipes and Filters Architecture"^^xsd:string ;
+                      rdfs:label "Pipeline Architecture" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Plug-inComponent
+:Plug-inComponent rdf:type owl:NamedIndividual ,
+                           :Component ;
+                  :accesses :Centrally_Shared_Database ,
+                            :OwnSeparateDatabase ;
+                  rdfs:label "Plug-in Component" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Plug-inRegistry
+:Plug-inRegistry rdf:type owl:NamedIndividual ,
+                          :DiscoveryComponent ;
+                 rdfs:label "Plug-in Registry" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Presentation_Layer
+:Presentation_Layer rdf:type owl:NamedIndividual ,
+                             :LayerComponent ;
+                    rdfs:label "Presentation Layer" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ProcessingGrid
+:ProcessingGrid rdf:type owl:NamedIndividual ,
+                         :Component ;
+                rdfs:label "Processing Grid" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ProcessingUnit
+:ProcessingUnit rdf:type owl:NamedIndividual ,
+                         :Component ;
+                rdfs:label "Processing Unit" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Processing_Event
+:Processing_Event rdf:type owl:NamedIndividual ,
+                           :Event ;
+                  rdfs:label "Processing Event" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ProducerFilter
+:ProducerFilter rdf:type owl:NamedIndividual ,
+                         :Filter_Component ;
+                rdfs:label "Producer Filter" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Proxy
+:Proxy rdf:type owl:NamedIndividual ,
+                :APILayer ;
+       rdfs:label "Proxy" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#PublishSubscribe
+:PublishSubscribe rdf:type owl:NamedIndividual ,
+                           :AsynchronousMessaging ;
+                  rdfs:label "Publish/Subscribe" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#RemoteProcedureInvocationUsingRest
+:RemoteProcedureInvocationUsingRest rdf:type owl:NamedIndividual ,
+                                             :RemoteProcedureInvocation ;
+                                    rdfs:label "Remote Procedure Invocation Using REST" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#RemoteProcedureInvocationUsinggRPC
+:RemoteProcedureInvocationUsinggRPC rdf:type owl:NamedIndividual ,
+                                             :RemoteProcedureInvocation ;
+                                    rdfs:label "Remote Procedure Invocation Using gRPC" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#SagaPattern
+:SagaPattern rdf:type owl:NamedIndividual ,
+                      :Pattern ;
+             rdfs:label "Saga Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Separation_of_concerns
+:Separation_of_concerns rdf:type owl:NamedIndividual ,
+                                 :ArchitecturalPrinciple ;
+                        rdfs:label "Separation of concerns" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Service-BasedArchitecturePattern
+:Service-BasedArchitecturePattern rdf:type owl:NamedIndividual ,
+                                           :DistributedArchitecturalPattern ;
+                                  :couplingBetweenComponents :LooseCoupling ;
+                                  :hasArchitectureCharacteristic :HighDeployability ,
+                                                                 :HighFaultTolerance ,
+                                                                 :HighModularity ,
+                                                                 :HighOverallCost ,
+                                                                 :HighReliability ,
+                                                                 :HighTestability ,
+                                                                 :LowElasticity ,
+                                                                 :MediumPerformance ,
+                                                                 :MediumScalability ,
+                                                                 :MediumSimplicity ;
+                                  :hasComponent :APIGateway ,
+                                                :DomainService ,
+                                                :Proxy ;
+                                  :hasPartitioning :DomainPartitioning ;
+                                  :usesFrontendApproach :Domain-basedUserInterface ,
+                                                        :Monolithic_Frontend ,
+                                                        :Service-basedUserInterface ;
+                                  :usesTheDesignApproach :Domain-DrivenDesignApproach ;
+                                  rdfs:label "Service-Based Architecture Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Service-basedUserInterface
+:Service-basedUserInterface rdf:type owl:NamedIndividual ,
+                                     :FrontendApproach ;
+                            rdfs:label "Service-based User Interface" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ServiceRegistry
+:ServiceRegistry rdf:type owl:NamedIndividual ,
+                          :DiscoveryComponent ;
+                 rdfs:label "Service Registry" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Service_Oriented_Architecture_Pattern
+:Service_Oriented_Architecture_Pattern rdf:type owl:NamedIndividual ,
+                                                :DistributedArchitecturalPattern ;
+                                       :couplingBetweenComponents :LooseCoupling ;
+                                       :hasArchitectureCharacteristic :HighScalability ,
+                                                                      :LowPerformance ,
+                                                                      :LowReliability ,
+                                                                      :MediumElasticity ,
+                                                                      :MediumFaultTolerance ,
+                                                                      :MediumModularity ,
+                                                                      :VeryLowDeployability ,
+                                                                      :VeryLowOverallCost ,
+                                                                      :VeryLowSimplicity ,
+                                                                      :VeryLowTestability ;
+                                       :hasComponent :ApplicationService ,
+                                                     :BusinessService ,
+                                                     :EnterpriseService ,
+                                                     :InfrastructureService ,
+                                                     :MessagingMiddleware ,
+                                                     :ServiceRegistry ;
+                                       :hasPartitioning :TechnicalPartitioning ;
+                                       :usesStorageSystem :Centrally_Shared_Database ;
+                                       :requiresOrchestration "true"^^xsd:boolean ;
+                                       rdfs:label "Service-Oriented Architecture Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ServicesLayer
+:ServicesLayer rdf:type owl:NamedIndividual ,
+                        :LayerComponent ;
+               rdfs:label "Services Layer" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#SidecarPattern
+:SidecarPattern rdf:type owl:NamedIndividual ,
+                         :Pattern ;
+                rdfs:label "Sidecar Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Single_responsibility
+:Single_responsibility rdf:type owl:NamedIndividual ,
+                                :ArchitecturalPrinciple ;
+                       rdfs:label "Single responsibility" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Space-Based_Architecture_Pattern
+:Space-Based_Architecture_Pattern rdf:type owl:NamedIndividual ,
+                                           :DistributedArchitecturalPattern ;
+                                  :hasArchitectureCharacteristic :HighReliability ,
+                                                                 :LowOverallCost ,
+                                                                 :MediumDeployability ,
+                                                                 :MediumFaultTolerance ,
+                                                                 :MediumModularity ,
+                                                                 :VeryHighElasticity ,
+                                                                 :VeryHighPerformance ,
+                                                                 :VeryHighScalability ,
+                                                                 :VeryLowSimplicity ,
+                                                                 :VeryLowTestability ;
+                                  :hasComponent :DataPumps ,
+                                                :DataReader ,
+                                                :DataWriter ,
+                                                :ProcessingUnit ,
+                                                :VirtualizedMiddleware ;
+                                  :hasPartitioning :DomainPartitioning ,
+                                                   :TechnicalPartitioning ;
+                                  rdfs:label "Space-Based Architecture Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#TechnicalPartitioning
+:TechnicalPartitioning rdf:type owl:NamedIndividual ,
+                                :Partitioning ;
+                       rdfs:label "TechnicalPartitioning" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#TesterFilter
+:TesterFilter rdf:type owl:NamedIndividual ,
+                       :Filter_Component ;
+              rdfs:label "Tester Filter" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#TightCoupling
+:TightCoupling rdf:type owl:NamedIndividual ,
+                        :Coupling ;
+               rdfs:label "Tight Coupling" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#TransormerFilter
+:TransormerFilter rdf:type owl:NamedIndividual ,
+                           :Filter_Component ;
+                  rdfs:label "Transormer Filter" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryHighDeployability
+:VeryHighDeployability rdf:type owl:NamedIndividual ,
+                                :Deployability ;
+                       :ratingValue 5 ;
+                       rdfs:label "Very High Deployability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryHighElasticity
+:VeryHighElasticity rdf:type owl:NamedIndividual ,
+                             :Elasticity ;
+                    :ratingValue 5 ;
+                    rdfs:label "Very High Elasticity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryHighFaultTolerance
+:VeryHighFaultTolerance rdf:type owl:NamedIndividual ,
+                                 :Fault_Tolerance ;
+                        :ratingValue 5 ;
+                        rdfs:label "Very High Fault Tolerance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryHighModularity
+:VeryHighModularity rdf:type owl:NamedIndividual ,
+                             :Modularity ;
+                    :ratingValue 5 ;
+                    rdfs:label "Very High Modularity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryHighOverallCost
+:VeryHighOverallCost rdf:type owl:NamedIndividual ,
+                              :Overall_Cost ;
+                     :ratingValue 5 ;
+                     rdfs:label "Very High Overall Cost" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryHighPerformance
+:VeryHighPerformance rdf:type owl:NamedIndividual ,
+                              :Performance ;
+                     :ratingValue 5 ;
+                     rdfs:label "Very High Performance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryHighReliability
+:VeryHighReliability rdf:type owl:NamedIndividual ,
+                              :Reliability ;
+                     :ratingValue 5 ;
+                     rdfs:label "Very High Reliability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryHighScalability
+:VeryHighScalability rdf:type owl:NamedIndividual ,
+                              :Scalability ;
+                     :ratingValue 5 ;
+                     rdfs:label "Very High Scalability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryHighSimplicity
+:VeryHighSimplicity rdf:type owl:NamedIndividual ,
+                             :Simplicity ;
+                    :ratingValue 5 ;
+                    rdfs:label "Very High Simplicity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryHighTestability
+:VeryHighTestability rdf:type owl:NamedIndividual ,
+                              :Testability ;
+                     :ratingValue 5 ;
+                     rdfs:label "Very High Testability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryLowDeployability
+:VeryLowDeployability rdf:type owl:NamedIndividual ,
+                               :Deployability ;
+                      :ratingValue 1 ;
+                      rdfs:label "Very Low Deployability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryLowElasticity
+:VeryLowElasticity rdf:type owl:NamedIndividual ,
+                            :Elasticity ;
+                   :ratingValue 1 ;
+                   rdfs:label "Very Low Elasticity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryLowFaultTolerance
+:VeryLowFaultTolerance rdf:type owl:NamedIndividual ,
+                                :Fault_Tolerance ;
+                       :ratingValue 1 ;
+                       rdfs:label "Very Low Fault Tolerance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryLowModularity
+:VeryLowModularity rdf:type owl:NamedIndividual ,
+                            :Modularity ;
+                   :ratingValue 1 ;
+                   rdfs:label "Very Low Modularity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryLowOverallCost
+:VeryLowOverallCost rdf:type owl:NamedIndividual ,
+                             :Overall_Cost ;
+                    :ratingValue 1 ;
+                    rdfs:label "Very Low Overall Cost" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryLowPerformance
+:VeryLowPerformance rdf:type owl:NamedIndividual ,
+                             :Performance ;
+                    :ratingValue 1 ;
+                    rdfs:label "Very Low Performance" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryLowReliability
+:VeryLowReliability rdf:type owl:NamedIndividual ,
+                             :Reliability ;
+                    :ratingValue 1 ;
+                    rdfs:label "Very Low Reliability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryLowScalability
+:VeryLowScalability rdf:type owl:NamedIndividual ,
+                             :Scalability ;
+                    :ratingValue 1 ;
+                    rdfs:label "Very Low Scalability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryLowSimplicity
+:VeryLowSimplicity rdf:type owl:NamedIndividual ,
+                            :Simplicity ;
+                   :ratingValue 1 ;
+                   rdfs:label "Very Low Simplicity" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VeryLowTestability
+:VeryLowTestability rdf:type owl:NamedIndividual ,
+                             :Testability ;
+                    :ratingValue 1 ;
+                    rdfs:label "Very Low Testability" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#VirtualizedMiddleware
+:VirtualizedMiddleware rdf:type owl:NamedIndividual ,
+                                :Component ;
+                       :includes :DataGrid ,
+                                 :DeploymentManager ,
+                                 :MessagingGrid ,
+                                 :ProcessingGrid ;
+                       rdfs:label "Virtualized Middleware" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Request/Reply
+<http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Request/Reply> rdf:type owl:NamedIndividual ,
+                                                                                                :AsynchronousMessaging .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+:CoreSystem rdfs:label "Core System" .
+
+
+:LayeredCoreSystem rdfs:label "Layered Core System" .
+
+
+:ModularCoreSystem rdfs:label "Modular Core System" .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty :hasComponent ;
+  owl:someValuesFrom :Event_Processing_Component ;
+  owl:equivalentClass [ rdf:type owl:Restriction ;
+                        owl:onProperty :inter-componentCommunication ;
+                        owl:someValuesFrom :AsynchronousCommunication
+                      ]
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Anti-Pattern
+                :ArchitecturalPattern
+                :ArchitecturalPrinciple
+                :ArchitectureCharacteristic
+                :Communication
+                :ComponentGranularity
+                :Coupling
+                :DesignApproach
+                :FrontendApproach
+                :Orchestration
+                :Partitioning
+                :Pattern
+                :StorageSystem
+              )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :API_Facade_Layer
+                        :Business_Layer
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :API_Facade_Layer
+                        :Database_Layer
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :API_Facade_Layer
+                        :Persistence_Layer
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :API_Facade_Layer
+                        :Presentation_Layer
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :API_Facade_Layer
+                        :ServicesLayer
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :Domain-basedUserInterface
+                        :Micro-frontend
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :DomainPartitioning
+                        :TechnicalPartitioning
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :MessageQueues
+                        :PublishSubscribe
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :Micro-frontend
+                        :Monolithic_Frontend
+                      )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
