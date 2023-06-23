@@ -1497,7 +1497,7 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#TechnicalPartitioning
 :TechnicalPartitioning rdf:type owl:NamedIndividual ,
                                 :Partitioning ;
-                       rdfs:label "TechnicalPartitioning" .
+                       rdfs:label "Technical Partitioning" .
 
 
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#TesterFilter
