@@ -1074,7 +1074,7 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
                                  :Event_Queue ,
                                  :InitiatingEvent ;
                    :inter-componentCommunication :PublishSubscribe ,
-                                                 <http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Request/Reply> ;
+                                                 :RequestReply ;
                    rdfs:label "Mediator Topology" .
 
 
@@ -1225,8 +1225,8 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
                                                                    :LowPerformance ,
                                                                    :VeryHighElasticity ,
                                                                    :VeryHighModularity ,
+                                                                   :VeryHighOverallCost ,
                                                                    :VeryHighScalability ,
-                                                                   :VeryLowOverallCost ,
                                                                    :VeryLowSimplicity ;
                                     :hasComponent :APIGateway ,
                                                   :Microservice ;
@@ -1376,6 +1376,12 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
 :RemoteProcedureInvocationUsinggRPC rdf:type owl:NamedIndividual ,
                                              :RemoteProcedureInvocation ;
                                     rdfs:label "Remote Procedure Invocation Using gRPC" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#RequestReply
+:RequestReply rdf:type owl:NamedIndividual ,
+                       :AsynchronousMessaging ;
+              rdfs:label "Request/Reply"@en .
 
 
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#SagaPattern
@@ -1666,11 +1672,6 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
                                  :MessagingGrid ,
                                  :ProcessingGrid ;
                        rdfs:label "Virtualized Middleware" .
-
-
-###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Request/Reply
-<http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Request/Reply> rdf:type owl:NamedIndividual ,
-                                                                                                :AsynchronousMessaging .
 
 
 #################################################################
