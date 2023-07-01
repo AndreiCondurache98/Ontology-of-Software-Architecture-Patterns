@@ -545,22 +545,22 @@
 
 ###  http://dbpedia.org/resource/Event-driven_architecture
 dbr:Event-driven_architecture rdf:type owl:NamedIndividual ;
-                              owl:sameAs :Event-Driven_Architecture_Pattern .
+                              owl:sameAs :EventDrivenArchitecturePattern .
 
 
 ###  http://dbpedia.org/resource/Microservices
 dbr:Microservices rdf:type owl:NamedIndividual ;
-                  owl:sameAs :Microservices_Architecture_Pattern .
+                  owl:sameAs :MicroservicesArchitecturePattern .
 
 
 ###  http://dbpedia.org/resource/Service-oriented_architecture
 dbr:Service-oriented_architecture rdf:type owl:NamedIndividual ;
-                                  owl:sameAs :Service_Oriented_Architecture_Pattern .
+                                  owl:sameAs :ServiceOrientedArchitecturePattern .
 
 
 ###  http://dbpedia.org/resource/Space-based_architecture
 dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
-                             owl:sameAs :Space-Based_Architecture_Pattern .
+                             owl:sameAs :SpaceBasedArchitecturePattern .
 
 
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#APIGateway
@@ -694,8 +694,8 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
 :CoreSystem rdf:type owl:NamedIndividual ,
                      :Component ;
             :accesses :Centrally_Shared_Database ;
-            :canBeDesignedUsing :Layered_Architecture_Pattern ,
-                                :Modular_Monolith_Architecture .
+            :canBeDesignedUsing :LayeredArchitecturePattern ,
+                                :ModularMonolithArchitecture .
 
 
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#DRY
@@ -755,7 +755,7 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Domain-DrivenDesignApproach
 :Domain-DrivenDesignApproach rdf:type owl:NamedIndividual ,
                                       :DesignApproach ;
-                             :usedBy :Microservices_Architecture_Pattern ;
+                             :usedBy :MicroservicesArchitecturePattern ;
                              rdfs:label "Domain-Driven Design Approach" .
 
 
@@ -782,8 +782,8 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
                         :ServiceComponent ;
                :accesses :Centrally_Shared_Database ,
                          :Domain-ScopedDatabase ;
-               :canBeDesignedUsing :Layered_Architecture_Pattern ,
-                                   :Modular_Monolith_Architecture ;
+               :canBeDesignedUsing :LayeredArchitecturePattern ,
+                                   :ModularMonolithArchitecture ;
                :hasComponent :API_Facade_Layer ;
                :hasGranularity :Coarse-Grained_Component ;
                rdfs:label "Domain Service" .
@@ -801,29 +801,29 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
                    rdfs:label "Enterprise Service" .
 
 
-###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Event-Driven_Architecture_Pattern
-:Event-Driven_Architecture_Pattern rdf:type owl:NamedIndividual ,
-                                            :DistributedArchitecturalPattern ;
-                                   :couplingBetweenComponents :LooseCoupling ;
-                                   :hasArchitectureCharacteristic :HighModularity ,
-                                                                  :HighScalability ,
-                                                                  :LowTestability ,
-                                                                  :MediumDeployability ,
-                                                                  :MediumElasticity ,
-                                                                  :MediumOverallCost ,
-                                                                  :MediumReliability ,
-                                                                  :VeryHighFaultTolerance ,
-                                                                  :VeryHighPerformance ,
-                                                                  :VeryLowSimplicity ;
-                                   :hasPartitioning :TechnicalPartitioning ;
-                                   :hasTopology :Broker_Topology ,
-                                                :Mediator_Topology ;
-                                   :usedInConjunctionWith :Microkernel_Architecture_Pattern ,
-                                                          :Microservices_Architecture_Pattern ,
-                                                          :PipelineArchitecture ,
-                                                          :Service_Oriented_Architecture_Pattern ,
-                                                          :Space-Based_Architecture_Pattern ;
-                                   rdfs:label "Event-Driven Architecture Pattern" .
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#EventDrivenArchitecturePattern
+:EventDrivenArchitecturePattern rdf:type owl:NamedIndividual ,
+                                         :DistributedArchitecturalPattern ;
+                                :couplingBetweenComponents :LooseCoupling ;
+                                :hasArchitectureCharacteristic :HighModularity ,
+                                                               :HighScalability ,
+                                                               :LowTestability ,
+                                                               :MediumDeployability ,
+                                                               :MediumElasticity ,
+                                                               :MediumOverallCost ,
+                                                               :MediumReliability ,
+                                                               :VeryHighFaultTolerance ,
+                                                               :VeryHighPerformance ,
+                                                               :VeryLowSimplicity ;
+                                :hasPartitioning :TechnicalPartitioning ;
+                                :hasTopology :Broker_Topology ,
+                                             :Mediator_Topology ;
+                                :usedInConjunctionWith :MicrokernelArchitecturePattern ,
+                                                       :MicroservicesArchitecturePattern ,
+                                                       :PipelineArchitecture ,
+                                                       :ServiceOrientedArchitecturePattern ,
+                                                       :SpaceBasedArchitecturePattern ;
+                                rdfs:label "Event-Driven Architecture Pattern" .
 
 
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Event_Broker
@@ -956,37 +956,37 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
                  rdfs:label "Initiating Event" .
 
 
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LayeredArchitecturePattern
+:LayeredArchitecturePattern rdf:type owl:NamedIndividual ,
+                                     :MonolithicArchitecturalPattern ;
+                            :hasAntiPattern :ArchitectureByImplicationAnti-Pattern ,
+                                            :ArchitectureSinkholeAnti-Pattern ;
+                            :hasArchitectureCharacteristic :LowPerformance ,
+                                                           :LowTestability ,
+                                                           :MediumReliability ,
+                                                           :VeryHighOverallCost ,
+                                                           :VeryHighSimplicity ,
+                                                           :VeryLowDeployability ,
+                                                           :VeryLowElasticity ,
+                                                           :VeryLowFaultTolerance ,
+                                                           :VeryLowModularity ,
+                                                           :VeryLowScalability ;
+                            :hasComponent :Business_Layer ,
+                                          :Database_Layer ,
+                                          :Persistence_Layer ,
+                                          :Presentation_Layer ;
+                            :hasPartitioning :TechnicalPartitioning ;
+                            :respectsPrinciple :Separation_of_concerns ;
+                            :usesPattern :BusinessDelegate ;
+                            <http://schema.org/alternateName> "N-tiered Architecture"^^xsd:string ;
+                            :requiresOrchestration "false"^^xsd:boolean ;
+                            rdfs:label "Layered Architecture Pattern" .
+
+
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LayeredCoreSystem
 :LayeredCoreSystem rdf:type owl:NamedIndividual ,
                             :CoreSystem ;
                    :accesses :Centrally_Shared_Database .
-
-
-###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Layered_Architecture_Pattern
-:Layered_Architecture_Pattern rdf:type owl:NamedIndividual ,
-                                       :MonolithicArchitecturalPattern ;
-                              :hasAntiPattern :ArchitectureByImplicationAnti-Pattern ,
-                                              :ArchitectureSinkholeAnti-Pattern ;
-                              :hasArchitectureCharacteristic :LowPerformance ,
-                                                             :LowTestability ,
-                                                             :MediumReliability ,
-                                                             :VeryHighOverallCost ,
-                                                             :VeryHighSimplicity ,
-                                                             :VeryLowDeployability ,
-                                                             :VeryLowElasticity ,
-                                                             :VeryLowFaultTolerance ,
-                                                             :VeryLowModularity ,
-                                                             :VeryLowScalability ;
-                              :hasComponent :Business_Layer ,
-                                            :Database_Layer ,
-                                            :Persistence_Layer ,
-                                            :Presentation_Layer ;
-                              :hasPartitioning :TechnicalPartitioning ;
-                              :respectsPrinciple :Separation_of_concerns ;
-                              :usesPattern :BusinessDelegate ;
-                              <http://schema.org/alternateName> "N-tiered Architecture"^^xsd:string ;
-                              :requiresOrchestration "false"^^xsd:boolean ;
-                              rdfs:label "Layered Architecture Pattern" .
 
 
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LooseCoupling
@@ -1180,30 +1180,30 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
                 rdfs:label "Micro-frontend" .
 
 
-###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Microkernel_Architecture_Pattern
-:Microkernel_Architecture_Pattern rdf:type owl:NamedIndividual ,
-                                           :MonolithicArchitecturalPattern ;
-                                  :couplingBetweenComponents :LooseCoupling ;
-                                  :hasArchitectureCharacteristic :HighSimplicity ,
-                                                                 :MediumDeployability ,
-                                                                 :MediumModularity ,
-                                                                 :MediumPerformance ,
-                                                                 :MediumReliability ,
-                                                                 :MediumTestability ,
-                                                                 :VeryHighOverallCost ,
-                                                                 :VeryLowElasticity ,
-                                                                 :VeryLowFaultTolerance ,
-                                                                 :VeryLowScalability ;
-                                  :hasComponent :CoreSystem ,
-                                                :Plug-inComponent ;
-                                  :hasPartitioning :DomainPartitioning ,
-                                                   :TechnicalPartitioning ;
-                                  :inter-componentCommunication :FunctionCall ,
-                                                                :MessageQueues ,
-                                                                :MethodInvocation ,
-                                                                :RemoteProcedureInvocationUsingRest ;
-                                  <http://schema.org/alternateName> "Plug-in Architecture"^^xsd:string ;
-                                  rdfs:label "Microkernel Architecture Pattern" .
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MicrokernelArchitecturePattern
+:MicrokernelArchitecturePattern rdf:type owl:NamedIndividual ,
+                                         :MonolithicArchitecturalPattern ;
+                                :couplingBetweenComponents :LooseCoupling ;
+                                :hasArchitectureCharacteristic :HighSimplicity ,
+                                                               :MediumDeployability ,
+                                                               :MediumModularity ,
+                                                               :MediumPerformance ,
+                                                               :MediumReliability ,
+                                                               :MediumTestability ,
+                                                               :VeryHighOverallCost ,
+                                                               :VeryLowElasticity ,
+                                                               :VeryLowFaultTolerance ,
+                                                               :VeryLowScalability ;
+                                :hasComponent :CoreSystem ,
+                                              :Plug-inComponent ;
+                                :hasPartitioning :DomainPartitioning ,
+                                                 :TechnicalPartitioning ;
+                                :inter-componentCommunication :FunctionCall ,
+                                                              :MessageQueues ,
+                                                              :MethodInvocation ,
+                                                              :RemoteProcedureInvocationUsingRest ;
+                                <http://schema.org/alternateName> "Plug-in Architecture"^^xsd:string ;
+                                rdfs:label "Microkernel Architecture Pattern" .
 
 
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Microservice
@@ -1214,44 +1214,44 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
               rdfs:label "Microservice" .
 
 
-###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Microservices_Architecture_Pattern
-:Microservices_Architecture_Pattern rdf:type owl:NamedIndividual ,
-                                             :DistributedArchitecturalPattern ;
-                                    :couplingBetweenComponents :LooseCoupling ;
-                                    :hasArchitectureCharacteristic :HighDeployability ,
-                                                                   :HighFaultTolerance ,
-                                                                   :HighReliability ,
-                                                                   :HighTestability ,
-                                                                   :LowPerformance ,
-                                                                   :VeryHighElasticity ,
-                                                                   :VeryHighModularity ,
-                                                                   :VeryHighOverallCost ,
-                                                                   :VeryHighScalability ,
-                                                                   :VeryLowSimplicity ;
-                                    :hasComponent :APIGateway ,
-                                                  :Microservice ;
-                                    :hasPartitioning :DomainPartitioning ;
-                                    :hasTopology :API_REST-based_topology ,
-                                                 :Application_REST-based_topology ,
-                                                 :Centralized_messaging_topology ;
-                                    :inter-componentCommunication :MessageQueues ,
-                                                                  :PublishSubscribe ,
-                                                                  :RemoteProcedureInvocationUsingRest ,
-                                                                  :RemoteProcedureInvocationUsinggRPC ;
-                                    :respectsPrinciple :Bounded_contexts ,
-                                                       :DRY ;
-                                    :usesFrontendApproach :Micro-frontend ,
-                                                          :Monolithic_Frontend ;
-                                    :usesPattern :APIGatewayPattern ,
-                                                 :BackendsForFrontends ,
-                                                 :CQRSPattern ,
-                                                 :CircuitBreakerPattern ,
-                                                 :SagaPattern ,
-                                                 :SidecarPattern ;
-                                    :usesTheDesignApproach :Domain-DrivenDesignApproach ;
-                                    :hasMultipleDeployableUnits "true"^^xsd:boolean ;
-                                    :requiresOrchestration "false"^^xsd:boolean ;
-                                    rdfs:label "Microservices Architecture Pattern" .
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#MicroservicesArchitecturePattern
+:MicroservicesArchitecturePattern rdf:type owl:NamedIndividual ,
+                                           :DistributedArchitecturalPattern ;
+                                  :couplingBetweenComponents :LooseCoupling ;
+                                  :hasArchitectureCharacteristic :HighDeployability ,
+                                                                 :HighFaultTolerance ,
+                                                                 :HighReliability ,
+                                                                 :HighTestability ,
+                                                                 :LowPerformance ,
+                                                                 :VeryHighElasticity ,
+                                                                 :VeryHighModularity ,
+                                                                 :VeryHighOverallCost ,
+                                                                 :VeryHighScalability ,
+                                                                 :VeryLowSimplicity ;
+                                  :hasComponent :APIGateway ,
+                                                :Microservice ;
+                                  :hasPartitioning :DomainPartitioning ;
+                                  :hasTopology :API_REST-based_topology ,
+                                               :Application_REST-based_topology ,
+                                               :Centralized_messaging_topology ;
+                                  :inter-componentCommunication :MessageQueues ,
+                                                                :PublishSubscribe ,
+                                                                :RemoteProcedureInvocationUsingRest ,
+                                                                :RemoteProcedureInvocationUsinggRPC ;
+                                  :respectsPrinciple :Bounded_contexts ,
+                                                     :DRY ;
+                                  :usesFrontendApproach :Micro-frontend ,
+                                                        :Monolithic_Frontend ;
+                                  :usesPattern :APIGatewayPattern ,
+                                               :BackendsForFrontends ,
+                                               :CQRSPattern ,
+                                               :CircuitBreakerPattern ,
+                                               :SagaPattern ,
+                                               :SidecarPattern ;
+                                  :usesTheDesignApproach :Domain-DrivenDesignApproach ;
+                                  :hasMultipleDeployableUnits "true"^^xsd:boolean ;
+                                  :requiresOrchestration "false"^^xsd:boolean ;
+                                  rdfs:label "Microservices Architecture Pattern" .
 
 
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ModularCoreSystem
@@ -1260,11 +1260,11 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
                    :accesses :Centrally_Shared_Database .
 
 
-###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Modular_Monolith_Architecture
-:Modular_Monolith_Architecture rdf:type owl:NamedIndividual ,
-                                        :MonolithicArchitecturalPattern ;
-                               :hasPartitioning :DomainPartitioning ;
-                               rdfs:label "Modular Monolith Architecture" .
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ModularMonolithArchitecture
+:ModularMonolithArchitecture rdf:type owl:NamedIndividual ,
+                                      :MonolithicArchitecturalPattern ;
+                             :hasPartitioning :DomainPartitioning ;
+                             rdfs:label "Modular Monolith Architecture" .
 
 
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Monolithic_Frontend
@@ -1396,67 +1396,67 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
                         rdfs:label "Separation of concerns" .
 
 
-###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Service-BasedArchitecturePattern
-:Service-BasedArchitecturePattern rdf:type owl:NamedIndividual ,
-                                           :DistributedArchitecturalPattern ;
-                                  :couplingBetweenComponents :LooseCoupling ;
-                                  :hasArchitectureCharacteristic :HighDeployability ,
-                                                                 :HighFaultTolerance ,
-                                                                 :HighModularity ,
-                                                                 :HighOverallCost ,
-                                                                 :HighReliability ,
-                                                                 :HighTestability ,
-                                                                 :LowElasticity ,
-                                                                 :MediumPerformance ,
-                                                                 :MediumScalability ,
-                                                                 :MediumSimplicity ;
-                                  :hasComponent :APIGateway ,
-                                                :DomainService ,
-                                                :Proxy ;
-                                  :hasPartitioning :DomainPartitioning ;
-                                  :usesFrontendApproach :Domain-basedUserInterface ,
-                                                        :Monolithic_Frontend ,
-                                                        :Service-basedUserInterface ;
-                                  :usesTheDesignApproach :Domain-DrivenDesignApproach ;
-                                  rdfs:label "Service-Based Architecture Pattern" .
-
-
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Service-basedUserInterface
 :Service-basedUserInterface rdf:type owl:NamedIndividual ,
                                      :FrontendApproach ;
                             rdfs:label "Service-based User Interface" .
 
 
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ServiceBasedArchitecturePattern
+:ServiceBasedArchitecturePattern rdf:type owl:NamedIndividual ,
+                                          :DistributedArchitecturalPattern ;
+                                 :couplingBetweenComponents :LooseCoupling ;
+                                 :hasArchitectureCharacteristic :HighDeployability ,
+                                                                :HighFaultTolerance ,
+                                                                :HighModularity ,
+                                                                :HighOverallCost ,
+                                                                :HighReliability ,
+                                                                :HighTestability ,
+                                                                :LowElasticity ,
+                                                                :MediumPerformance ,
+                                                                :MediumScalability ,
+                                                                :MediumSimplicity ;
+                                 :hasComponent :APIGateway ,
+                                               :DomainService ,
+                                               :Proxy ;
+                                 :hasPartitioning :DomainPartitioning ;
+                                 :usesFrontendApproach :Domain-basedUserInterface ,
+                                                       :Monolithic_Frontend ,
+                                                       :Service-basedUserInterface ;
+                                 :usesTheDesignApproach :Domain-DrivenDesignApproach ;
+                                 rdfs:label "Service-Based Architecture Pattern" .
+
+
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ServiceOrientedArchitecturePattern
+:ServiceOrientedArchitecturePattern rdf:type owl:NamedIndividual ,
+                                             :DistributedArchitecturalPattern ;
+                                    :couplingBetweenComponents :LooseCoupling ;
+                                    :hasArchitectureCharacteristic :HighScalability ,
+                                                                   :LowPerformance ,
+                                                                   :LowReliability ,
+                                                                   :MediumElasticity ,
+                                                                   :MediumFaultTolerance ,
+                                                                   :MediumModularity ,
+                                                                   :VeryLowDeployability ,
+                                                                   :VeryLowOverallCost ,
+                                                                   :VeryLowSimplicity ,
+                                                                   :VeryLowTestability ;
+                                    :hasComponent :ApplicationService ,
+                                                  :BusinessService ,
+                                                  :EnterpriseService ,
+                                                  :InfrastructureService ,
+                                                  :MessagingMiddleware ,
+                                                  :ServiceRegistry ;
+                                    :hasPartitioning :TechnicalPartitioning ;
+                                    :usesStorageSystem :Centrally_Shared_Database ;
+                                    :requiresOrchestration "true"^^xsd:boolean ;
+                                    rdfs:label "Service-Oriented Architecture Pattern" .
+
+
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ServiceRegistry
 :ServiceRegistry rdf:type owl:NamedIndividual ,
                           :DiscoveryComponent ;
                  rdfs:label "Service Registry" .
-
-
-###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Service_Oriented_Architecture_Pattern
-:Service_Oriented_Architecture_Pattern rdf:type owl:NamedIndividual ,
-                                                :DistributedArchitecturalPattern ;
-                                       :couplingBetweenComponents :LooseCoupling ;
-                                       :hasArchitectureCharacteristic :HighScalability ,
-                                                                      :LowPerformance ,
-                                                                      :LowReliability ,
-                                                                      :MediumElasticity ,
-                                                                      :MediumFaultTolerance ,
-                                                                      :MediumModularity ,
-                                                                      :VeryLowDeployability ,
-                                                                      :VeryLowOverallCost ,
-                                                                      :VeryLowSimplicity ,
-                                                                      :VeryLowTestability ;
-                                       :hasComponent :ApplicationService ,
-                                                     :BusinessService ,
-                                                     :EnterpriseService ,
-                                                     :InfrastructureService ,
-                                                     :MessagingMiddleware ,
-                                                     :ServiceRegistry ;
-                                       :hasPartitioning :TechnicalPartitioning ;
-                                       :usesStorageSystem :Centrally_Shared_Database ;
-                                       :requiresOrchestration "true"^^xsd:boolean ;
-                                       rdfs:label "Service-Oriented Architecture Pattern" .
 
 
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#ServicesLayer
@@ -1477,27 +1477,27 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
                        rdfs:label "Single responsibility" .
 
 
-###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#Space-Based_Architecture_Pattern
-:Space-Based_Architecture_Pattern rdf:type owl:NamedIndividual ,
-                                           :DistributedArchitecturalPattern ;
-                                  :hasArchitectureCharacteristic :HighReliability ,
-                                                                 :LowOverallCost ,
-                                                                 :MediumDeployability ,
-                                                                 :MediumFaultTolerance ,
-                                                                 :MediumModularity ,
-                                                                 :VeryHighElasticity ,
-                                                                 :VeryHighPerformance ,
-                                                                 :VeryHighScalability ,
-                                                                 :VeryLowSimplicity ,
-                                                                 :VeryLowTestability ;
-                                  :hasComponent :DataPumps ,
-                                                :DataReader ,
-                                                :DataWriter ,
-                                                :ProcessingUnit ,
-                                                :VirtualizedMiddleware ;
-                                  :hasPartitioning :DomainPartitioning ,
-                                                   :TechnicalPartitioning ;
-                                  rdfs:label "Space-Based Architecture Pattern" .
+###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#SpaceBasedArchitecturePattern
+:SpaceBasedArchitecturePattern rdf:type owl:NamedIndividual ,
+                                        :DistributedArchitecturalPattern ;
+                               :hasArchitectureCharacteristic :HighReliability ,
+                                                              :LowOverallCost ,
+                                                              :MediumDeployability ,
+                                                              :MediumFaultTolerance ,
+                                                              :MediumModularity ,
+                                                              :VeryHighElasticity ,
+                                                              :VeryHighPerformance ,
+                                                              :VeryHighScalability ,
+                                                              :VeryLowSimplicity ,
+                                                              :VeryLowTestability ;
+                               :hasComponent :DataPumps ,
+                                             :DataReader ,
+                                             :DataWriter ,
+                                             :ProcessingUnit ,
+                                             :VirtualizedMiddleware ;
+                               :hasPartitioning :DomainPartitioning ,
+                                                :TechnicalPartitioning ;
+                               rdfs:label "Space-Based Architecture Pattern" .
 
 
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#TechnicalPartitioning
