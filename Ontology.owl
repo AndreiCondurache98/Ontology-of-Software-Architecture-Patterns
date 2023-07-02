@@ -959,6 +959,7 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#LayeredArchitecturePattern
 :LayeredArchitecturePattern rdf:type owl:NamedIndividual ,
                                      :MonolithicArchitecturalPattern ;
+                            :couplingBetweenComponents :TightCoupling ;
                             :hasAntiPattern :ArchitectureByImplicationAnti-Pattern ,
                                             :ArchitectureSinkholeAnti-Pattern ;
                             :hasArchitectureCharacteristic :LowPerformance ,
@@ -1264,6 +1265,9 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
 :ModularMonolithArchitecture rdf:type owl:NamedIndividual ,
                                       :MonolithicArchitecturalPattern ;
                              :hasPartitioning :DomainPartitioning ;
+                             :usesFrontendApproach :Monolithic_Frontend ;
+                             :usesStorageSystem :Centrally_Shared_Database ;
+                             :hasMultipleDeployableUnits "false"^^xsd:boolean ;
                              rdfs:label "Modular Monolith Architecture" .
 
 
@@ -1300,12 +1304,23 @@ dbr:Space-based_architecture rdf:type owl:NamedIndividual ;
 ###  http://www.semanticweb.org/ontologies/webArchitecturalPatternsOntology#PipelineArchitecture
 :PipelineArchitecture rdf:type owl:NamedIndividual ,
                                :MonolithicArchitecturalPattern ;
+                      :hasArchitectureCharacteristic :LowDeployability ,
+                                                     :LowPerformance ,
+                                                     :MediumModularity ,
+                                                     :MediumReliability ,
+                                                     :MediumTestability ,
+                                                     :VeryHighSimplicity ,
+                                                     :VeryLowElasticity ,
+                                                     :VeryLowFaultTolerance ,
+                                                     :VeryLowOverallCost ,
+                                                     :VeryLowScalability ;
                       :hasComponent :ConsumerFilter ,
                                     :PipeComponent ,
                                     :ProducerFilter ,
                                     :TesterFilter ,
                                     :TransormerFilter ;
                       :hasPartitioning :TechnicalPartitioning ;
+                      :respectsPrinciple :Separation_of_concerns ;
                       <http://schema.org/alternateName> "Pipes and Filters Architecture"^^xsd:string ;
                       rdfs:label "Pipeline Architecture" .
 
